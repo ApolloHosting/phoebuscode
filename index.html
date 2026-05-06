@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#242424" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Phoebus AI</title>
+    <script>
+      // Polyfill process for browser SDKs to prevent ReferenceError
+      window.process = { env: {} };
+      
+      // Catch fatal module evaluation errors that happen before React mounts
+      window.addEventListener('error', function(e) {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML === '') {
+          root.innerHTML = '<div style="color:#ff8080; padding: 20px; background: #242424; height: 100vh; font-family: sans-serif;"><h2>Fatal Error on Load</h2><pre style="white-space: pre-wrap; background: #1e1e1e; padding: 15px; border-radius: 8px;">' + (e.error ? e.error.stack : e.message) + '</pre><p>Please check your Netlify environment variables.</p></div>';
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

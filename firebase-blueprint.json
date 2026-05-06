@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "User project for organizing chats",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "name"]
+    },
+    "Chat": {
+      "title": "Chat",
+      "description": "User chat session",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "projectId": { "type": "string" },
+        "title": { "type": "string" },
+        "messages": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "messages"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Stores user projects"
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Stores user chat history"
+    }
+  }
+}
